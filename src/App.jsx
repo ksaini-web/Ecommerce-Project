@@ -1,5 +1,5 @@
 import React from 'react'
-import Cards from './cards'
+import Cards from './Cards'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ProductDetail from './ProductDetail'
 import Home from './assets/Home'
