@@ -78,9 +78,7 @@ function Navbar({ products, setFilteredProduct, setCurrentPage }) {
                         onClick={() => handleFilter(item)}
                     >
                         {item}
-                        {item === "Categories" && (
-                            <RiArrowDropDownLine className='text-2xl' />
-                        )}
+                        
                     </li>
                 ))}
             </ul>
