@@ -61,7 +61,7 @@ function Navbar({ products, setFilteredProduct, setCurrentPage }) {
     const {totalItems} = useContext(CartContext);
 
     return (
-        <div className='bg-white flex items-center justify-between px-4 py-2 relative font-bold z-50'>
+        <div className='bg-white flex items-center justify-between px-4 py-2 relative font-bold z-50 sm:max-w-full'>
 
             <Link to="/">
                 <h1 className='font-extrabold lg:text-xl text-green-900 flex items-center'>
