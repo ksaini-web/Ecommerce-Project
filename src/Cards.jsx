@@ -1,5 +1,5 @@
-import React ,{useEffect , useState} from 'react'
-import axios from "axios"
+import React ,{ useState} from 'react'
+
 
 import { Link } from 'react-router-dom';
 import {useContext} from "react"
@@ -11,42 +11,20 @@ import { CartContext } from './CartContext';
 
 
 
-    function shuffleArray(array){
-
-        for(let i =array.length-1 ; i>0;i-- ){
-
-            const j = Math.floor(Math.random()*(i+1));
-
-            [array[i] , array[j]] =[array[j] , array[i] ] ;
-        }
-
-        return array;
-    }
 
   
 
-   function Cards() {
-        const [ Products , setProducts] = useState([]);
+   function Cards({products}) {
+      
 
     const {addToCart} = useContext(CartContext);
 
    const [qty,setqty] = useState(1);
 
    
-    useEffect(() =>{
-
-       
-
-        axios.get("https://dummyjson.com/products")
-        .then((res) =>{
-
-           
-            setProducts(shuffleArray(res.data.products));
-        })
-        .catch((err) =>{
-     console.log(err);
-        });
-    },[]);
+   console.log("Total:", products.length);
+console.log("Deals:", products.filter(item => item.discountPercentage > 10).length)
+;
 
 
     const categoryColors = {
@@ -76,7 +54,7 @@ import { CartContext } from './CartContext';
         {
 
  
-            Products.map((product)=>{
+           products?.map((product)=>{
 
                   const price = product.price;
     const discount = product.discountPercentage;

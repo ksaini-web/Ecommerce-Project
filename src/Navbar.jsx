@@ -4,103 +4,135 @@ import { FaSearch } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
-const handleFilter = (type) =>{
+function Navbar({ products, setFilteredProduct }) {
 
-    let Filtered = [];
-
-    if(type === "Deals"){
-       Filtered = products.filter(item => item.discountPercentage > 0) ;
-    }
-    else if(type === "What's New"){
-       Filtered = products.slice(0,10); 
-    }
-
-    else if(type === "Delivery"){
-    Filtered = products.filter(item => item.stock>0);
-
-    }
-
-    
-    }
-
-
-function Navbar() {
-
-    const [ meanOpen,setMenuOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const menuItems = ["Categories","Deals","What's New","Delivery"]
-  return (
-    <div className='bg-white  flex items-center justify-between px-4 py-2 relative font-bold'>
-       <Link to="/"><h1 className='font-extrabold mr-2.5 lg:text-xl text-green-900 flex items-center  '><span className='text-3xl '><MdAddShoppingCart /></span>Shopcart </h1></Link> 
 
+    const handleFilter = (type) => {
 
-        <ul className='hidden lg:flex  justify-center gap-7 items-center'>
+        let filtered = [];
 
-            {
-                menuItems.map((item,index) =>(
-                    <li key={index} className='flex items-center  z-10'>
-                        {item}
-                                                    {item === "Categories" && (
-                                <RiArrowDropDownLine className='text-2xl' />
+        if(type === "Deals"){
+          
+   filtered = products
+     .filter(item => item.discountPercentage > 10)
+     .sort((a,b) => b.discountPercentage - a.discountPercentage)
+     .slice(0,10);
+          }
+        else if(type === "What's New"){
+           filtered = products.slice(0,10);
+        }
+        else if(type === "Delivery"){
+           filtered = products.filter(item => item.stock > 10);
+        }
+        else{
+           filtered = products;
+        }
 
-                            ) }
-                        
-                        </li>
+        setFilteredProduct(filtered);
+        setMenuOpen(false);
+    }
+     
+    const [search,setSearch] = useState("");
 
-                ))
+    const handleSearch = (value) =>{
 
-            }
+        if(value === ""){
+            setFilteredProduct(products);
+            return;
+        }
+
+        setSearch(value)
+
+        const filtered = products.filter(item =>
+        item.title.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setFilteredProduct(filtered);
+    }
+
+    return (
+        <div className='bg-white flex items-center justify-between px-4 py-2 relative font-bold'>
+
             
+            <Link to="/">
+                <h1 className='font-extrabold lg:text-xl text-green-900 flex items-center'>
+                    <span className='text-3xl'><MdAddShoppingCart /></span>
+                    Shopcart
+                </h1>
+            </Link>
 
+            
+            <ul className='hidden lg:flex gap-7 items-center'>
+                {menuItems.map((item,index) =>(
+                    <li 
+                        key={index} 
+                        className='flex items-center cursor-pointer'
+                        onClick={() => handleFilter(item)}
+                    >
+                        {item}
+                        {item === "Categories" && (
+                            <RiArrowDropDownLine className='text-2xl' />
+                        )}
+                    </li>
+                ))}
             </ul>
 
-                                         <li className='  bg-amber-300 flex  w-76 h-7 justify-center items-center  rounded-full w-  px-1.5 py-1'><input type="text" placeholder='Search Product' /><FaSearch className='cursor-pointer bg-transparent outline-none flex-1'/> </li>
- <li className='flex items-center gap-0.5'><FaRegUser />Account </li>
+            
+            <div className='bg-amber-300 flex w-64 h-8 items-center rounded-full px-2'>
+                <input 
+                    type="text" 
+                    placeholder='Search Product' 
+                    className='bg-transparent outline-none flex-1 px-2'
+                    onChange={(e) => handleSearch(e.target.value)}
+                    onKeyDown={(e)=>{
+                        if(e.key === "Enter"){
+                           handleSearch(); 
+                        }
+                    }}
+                />
+                <FaSearch />
+            </div>
 
-            <li className=' gap-0.5 '><Link to="/cart" className='flex  items-center lg:mr-3.5'>Cart <MdAddShoppingCart /></Link></li>
+            
+            <div className='hidden lg:flex items-center gap-1'>
+                <FaRegUser /> Account
+            </div>
+
            
+            <Link to="/cart" className='flex items-center gap-1'>
+                Cart <MdAddShoppingCart />
+            </Link>
 
-        <IoMenu 
-        className='text-2xl lg:hidden cursor-pointer'
-        onClick={()=>setMenuOpen(!meanOpen)}
-        
-        />
+           
+            <IoMenu 
+                className='text-2xl lg:hidden cursor-pointer'
+                onClick={() => setMenuOpen(!menuOpen)}
+            />
 
-        {
-          meanOpen && (
-
-            <div className='lg:hidden px-4 pb-3 absolute ml-30 top-12 left-4/6 bg-white  shadow-lg  rounded-b-3xl'>
-                
-
-                <ul className='flex flex-col gap-3'>
-
-                    {
-                        menuItems.map((item , index)=>(
-                            
-                            <li key={index} className='flex items-center gap-1'>
+            
+            {menuOpen && (
+                <div className='lg:hidden px-4 py-3 absolute right-4 top-12 bg-white shadow-lg rounded-xl'>
+                    <ul className='flex flex-col gap-3'>
+                        {menuItems.map((item,index)=>(
+                            <li 
+                                key={index} 
+                                className='cursor-pointer'
+                                onClick={() => handleFilter(item)}
+                            >
                                 {item}
-                            {item === 'Categories' && (
-                              <RiArrowDropDownLine className='text-2xl  '/>
-
-                            )}
                             </li>
                         ))}
+                    </ul>
+                </div>
+            )}
 
-                        
-            
-          
-        
-                    
-
-                </ul>
-
-            </div>
-          )  
-        }
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Navbar
