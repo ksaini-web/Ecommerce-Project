@@ -52,6 +52,9 @@ function Cart() {
                         <p className='text-lg font-bold'>
                             ${item.price * item.quantity}
                         </p>
+
+                        
+                       
                     </div>
 
                 ))
@@ -60,6 +63,10 @@ function Cart() {
         </div>
 
       <h1 className='text-2xl font-bold text-right mt-6 '> Total Price : ${total}</h1>
+         { cart.length !== 0 ?
+             ( <div className='flex justify-center '>
+       <button className=' ml-10 mt-6 bg-yellow-400 text-black px-6 py-3 rounded-b-md hover:bg-yellow-600 hover:cursor-pointer hover:shadow-2xl font-semibold text-xl'>Buy Now </button>
+       </div>):null}
     </div>
 
     </div>

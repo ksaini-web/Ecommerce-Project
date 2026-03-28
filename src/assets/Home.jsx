@@ -62,7 +62,7 @@ function Home() {
               <button 
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={indexOfLast >= filteredProducts.length}
-                className="bg-black text-white px-4 py-2 rounded disabled:opacity-50"
+                className="bg-black text-white px-4 py-2 rounded disabled:opacity-50 "
               >
                 Next
               </button>
