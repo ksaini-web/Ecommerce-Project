@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { MdAddShoppingCart } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
@@ -6,7 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Link } from "react-router-dom"
 
-function Navbar({ products, setFilteredProduct }) {
+function Navbar({ products, setFilteredProduct ,setCurrentPage}) {
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -35,6 +35,7 @@ function Navbar({ products, setFilteredProduct }) {
 
         setFilteredProduct(filtered);
         setMenuOpen(false);
+        setCurrentPage(1);
     }
      
     const [search,setSearch] = useState("");
@@ -52,7 +53,7 @@ function Navbar({ products, setFilteredProduct }) {
         item.title.toLowerCase().includes(value.toLowerCase())
     );
 
-    setFilteredProduct(filtered);
+    
     }
 
     return (

@@ -9,25 +9,22 @@ function Home() {
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  function shuffleArray(array){
-    for(let i = array.length-1; i > 0; i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
+  const productsPerPage = 8;
+
+  const indexOfLast = currentPage * productsPerPage;
+  const indexOfFirst = indexOfLast - productsPerPage;
+
+  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
 
   useEffect(() => {
     axios.get("https://dummyjson.com/products")
       .then((res) => {
-        const data = shuffleArray(res.data.products);
-        setProducts(data);
-        setFilteredProducts(data); 
+        setProducts(res.data.products);
+        setFilteredProducts(res.data.products);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -45,11 +42,31 @@ function Home() {
             <Navbar
               products={products}
               setFilteredProduct={setFilteredProducts}
+              setCurrentPage={setCurrentPage}
             />
 
             <HeroSection/>
 
-            <Cards products={filteredProducts} />
+            <Cards products={currentProducts} />
+
+           
+            <div className="flex justify-center gap-4 my-5">
+              <button 
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="bg-black text-white px-4 py-2 rounded disabled:opacity-50"
+              >
+                Prev
+              </button>
+
+              <button 
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={indexOfLast >= filteredProducts.length}
+                className="bg-black text-white px-4 py-2 rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
 
           </div>
         </div>
