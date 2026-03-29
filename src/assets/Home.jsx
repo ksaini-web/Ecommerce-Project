@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import TopBar from '../TopBar'
-import Navbar from '../Navbar'
-import HeroSection from '../HeroSection'
-import Cards from '../Cards'
-import axios from "axios"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import TopBar from '../TopBar';
+import Navbar from '../Navbar';
+import HeroSection from '../HeroSection';
+import Cards from '../Cards';
+import './Home.css';
 
 function Home() {
-
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const productsPerPage = 8;
-
   const indexOfLast = currentPage * productsPerPage;
   const indexOfFirst = indexOfLast - productsPerPage;
-
   const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
 
   useEffect(() => {
-    axios.get("https://dummyjson.com/products")
+    axios
+      .get('https://dummyjson.com/products')
       .then((res) => {
         setProducts(res.data.products);
         setFilteredProducts(res.data.products);
@@ -28,52 +27,52 @@ function Home() {
   }, []);
 
   return (
-    <div className='bg-yellow-500 min-h-screen w-full'>
+    <div className="home-page">
+      <div className="home-page__inner">
+        <TopBar />
 
-      <div className='lg:ml-9 mx-3'>
+        <div className="home-page__panel">
+          <Navbar
+            products={products}
+            setFilteredProduct={setFilteredProducts}
+            setCurrentPage={setCurrentPage}
+          />
 
-        <div className='mx-auto pt-10 shadow-lg rounded-xl'>
-          <TopBar/>
-        </div>
+          <HeroSection />
 
-        <div className='bg-amber-50'>
-          <div className='mx-5'>
-
-            <Navbar
-              products={products}
-              setFilteredProduct={setFilteredProducts}
-              setCurrentPage={setCurrentPage}
-            />
-
-            <HeroSection/>
-
-            <Cards products={currentProducts} />
-
-           
-            <div className="flex justify-center gap-4 my-5">
-              <button 
-                onClick={() => setCurrentPage(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="bg-black text-white px-4 py-2 rounded disabled:opacity-50"
-              >
-                Prev
-              </button>
-
-              <button 
-                onClick={() => setCurrentPage(currentPage + 1)}
-                disabled={indexOfLast >= filteredProducts.length}
-                className="bg-black text-white px-4 py-2 rounded disabled:opacity-50 "
-              >
-                Next
-              </button>
+          <div className="home-page__section-head">
+            <div>
+              <span className="home-page__eyebrow">Curated products</span>
+              <h2>Fresh deals for your everyday cart</h2>
             </div>
+            <p>{filteredProducts.length} products found</p>
+          </div>
 
+          <Cards products={currentProducts} />
+
+          <div className="home-page__pagination">
+            <button
+              type="button"
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </button>
+
+            <span>Page {currentPage}</span>
+
+            <button
+              type="button"
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={indexOfLast >= filteredProducts.length}
+            >
+              Next
+            </button>
           </div>
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

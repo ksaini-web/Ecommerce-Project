@@ -1,76 +1,56 @@
-import React, { useContext } from 'react'
-
-import { CartContext } from '../CartContext'
+import React, { useContext } from 'react';
+import { FaCartArrowDown } from 'react-icons/fa';
+import { CartContext } from '../CartContext';
 import Navbar from '../Navbar';
-
-import { Link } from 'react-router-dom';
-
-import { FaCartArrowDown } from "react-icons/fa";
+import './Cart.css';
 
 function Cart() {
-
-    const {cart} = useContext(CartContext);
-    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const { cart } = useContext(CartContext);
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
+    <div className="cart-page">
+      <div className="cart-page__inner">
+        <Navbar />
 
-    <div>
-        <Navbar/>
-    <div className='max-w-7xl mx-auto  p-5 bg-white rounded-2xl shadow-lg '>
-     
-     <div className='text-center  text-lg font-extrabold  md:text-2xl rounded-2xl w-2xl bg-amber-300'> Hurry up! Your items are reserved for 10 minutes</div>
-    
-    <div className='mt-28'>
-        {
-            cart.length === 0 ?
-             (
-                <p className='text-2xl font-bold text-center flex  flex-col text-gray-700 '> <FaCartArrowDown className='mx-auto my-6 animate-bounce text-9xl m-6'/><span className='text-2xl font-semibold'>Your cart is empty</span></p>
+        <section className="cart">
+          <div className="cart__banner">Hurry up! Your items are reserved for 10 minutes.</div>
+
+          <div className="cart__body">
+            {cart.length === 0 ? (
+              <div className="cart__empty">
+                <FaCartArrowDown />
+                <span>Your cart is empty</span>
+              </div>
             ) : (
-                cart.map(item =>(
-
-                
-                    <div key ={item.id} className='flex items-center justify-center  py-4  '>
-                        
-                      
-                           
-                      <div className='flex items-center gap-4 w-1/2'>
-                        
-                        <img className='h-24 w-24 object-cover rounded ' src={item.thumbnail}/>
-
-                       
-                         
-                        
-
-                        </div>
-                       
-
-                        <div className= 'w-1/4 font-bold text-lg '>
-                            <h2 className='font-semibold text-lg'>{item.title}</h2>
-                            <p className='text-gray-600'>Qty : {item.quantity}</p>
-                        </div>
-
-                        <p className='text-lg font-bold'>
-                            ${item.price * item.quantity}
-                        </p>
-
-                        
-                       
+              cart.map((item, index) => (
+                <article
+                  key={item.id}
+                  className="cart__item"
+                  style={{ animationDelay: `${index * 90}ms` }}
+                >
+                  <div className="cart__product">
+                    <img src={item.thumbnail} alt={item.title} />
+                    <div>
+                      <h2>{item.title}</h2>
+                      <p>Qty: {item.quantity}</p>
                     </div>
+                  </div>
 
-                ))
-            )
-        } 
-        </div>
+                  <p className="cart__price">${(item.price * item.quantity).toFixed(2)}</p>
+                </article>
+              ))
+            )}
+          </div>
 
-      <h1 className='text-2xl font-bold text-right mt-6 '> Total Price : ${total}</h1>
-         { cart.length !== 0 ?
-             ( <div className='flex justify-center '>
-       <button className=' ml-10 mt-6 bg-yellow-400 text-black px-6 py-3 rounded-b-md hover:bg-yellow-600 hover:cursor-pointer hover:shadow-2xl font-semibold text-xl'>Buy Now </button>
-       </div>):null}
+          <div className="cart__footer">
+            <h1>Total Price: ${total.toFixed(2)}</h1>
+            {cart.length !== 0 && <button type="button">Buy Now</button>}
+          </div>
+        </section>
+      </div>
     </div>
-
-    </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

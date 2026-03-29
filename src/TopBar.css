@@ -1,0 +1,141 @@
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(6, 78, 59, 0.96), rgba(20, 83, 45, 0.92) 52%, rgba(12, 74, 110, 0.94));
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 10px 20px rgba(6, 78, 59, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+
+.topbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.18), transparent 28%);
+  pointer-events: none;
+}
+
+.topbar__item,
+.topbar__promo {
+  position: relative;
+  z-index: 1;
+}
+
+.topbar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  color: rgba(240, 253, 250, 0.96);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.topbar__item--contact,
+.topbar__item--location {
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(4px);
+}
+
+.topbar__item--location {
+  justify-self: end;
+}
+
+.topbar__icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #facc15;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.topbar__promo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+  text-align: center;
+}
+
+.topbar__promo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+  color: #1f2937;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 14px rgba(245, 158, 11, 0.14);
+  white-space: nowrap;
+}
+
+.topbar__promo p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .topbar__item,
+  .topbar__promo {
+    justify-content: center;
+  }
+
+  .topbar__item--location {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar {
+    padding: 0.9rem;
+    border-radius: 18px;
+  }
+
+  .topbar__promo {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .topbar__promo p {
+    font-size: 0.88rem;
+  }
+
+  .topbar__item {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.84rem;
+  }
+}

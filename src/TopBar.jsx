@@ -1,23 +1,34 @@
-import React from 'react'
+import React from 'react';
+import { FiMapPin, FiPhoneCall } from 'react-icons/fi';
+import { HiSparkles } from 'react-icons/hi2';
+import './TopBar.css';
 
 function TopBar() {
   return (
-    <div>
-        <div className='bg-green-900 h-6 flex justify-between px-4 py-2 items-center text-white '>
+    <div className="topbar">
+      <div className="topbar__item topbar__item--contact">
+        <span className="topbar__icon">
+          <FiPhoneCall />
+        </span>
+        <span>+00 1234 567 890</span>
+      </div>
 
-            <h1 className=''>+001234567890</h1>
-            <h1 className=''>Get 50% Off on Selected items | Shop Now </h1>
+      <div className="topbar__promo">
+        <span className="topbar__promo-badge">
+          <HiSparkles />
+          Limited Deal
+        </span>
+        <p>Get 50% off on selected items. Shop now before tonight.</p>
+      </div>
 
-
-
-             <h1 className=''>Eng Location</h1>
-             
-        
-
-        </div>
-
+      <div className="topbar__item topbar__item--location">
+        <span className="topbar__icon">
+          <FiMapPin />
+        </span>
+        <span>English / India</span>
+      </div>
     </div>
-  )
+  );
 }
 
-export default TopBar
+export default TopBar;

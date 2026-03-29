@@ -1,0 +1,125 @@
+.home-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(254, 240, 138, 0.55), transparent 28%),
+    radial-gradient(circle at top right, rgba(134, 239, 172, 0.28), transparent 24%),
+    linear-gradient(180deg, #fefce8 0%, #fff7ed 52%, #fffbeb 100%);
+}
+
+.home-page__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.2rem;
+}
+
+.home-page__panel {
+  margin-top: 1rem;
+  padding: 1rem 1rem 1.5rem;
+  border-radius: 36px;
+  background: rgba(255, 251, 235, 0.68);
+  border: 1px solid rgba(217, 119, 6, 0.1);
+  box-shadow: 0 12px 26px rgba(120, 53, 15, 0.06);
+}
+
+.home-page__section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.home-page__eyebrow {
+  display: inline-block;
+  color: #a16207;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.home-page__section-head h2 {
+  margin: 0.4rem 0 0;
+  color: #1c1917;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-weight: 900;
+}
+
+.home-page__section-head p {
+  margin: 0;
+  color: #78716c;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.home-page__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.home-page__pagination button {
+  padding: 0.8rem 1.15rem;
+  border: 0;
+  border-radius: 16px;
+  background: #111827;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.home-page__pagination button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.home-page__pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.home-page__pagination span {
+  color: #57534e;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .home-page__inner {
+    padding: 0.75rem;
+  }
+
+  .home-page__panel {
+    border-radius: 24px;
+    padding: 0.7rem 0.55rem 1.1rem;
+  }
+
+  .home-page__section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 0.65rem;
+    margin-top: 0.75rem;
+  }
+
+  .home-page__pagination {
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .home-page__pagination button {
+    flex: 1 1 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page__section-head h2 {
+    font-size: 1.45rem;
+  }
+
+  .home-page__section-head p,
+  .home-page__pagination span {
+    font-size: 0.88rem;
+  }
+}
