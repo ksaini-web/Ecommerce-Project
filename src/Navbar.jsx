@@ -4,7 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 import { FaRegUser } from 'react-icons/fa6';
 import { IoMenu } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import { CartContext } from './CartContext';
+import { CartContext } from './context/CartContext';
 import './Navbar.css';
 
 function Navbar({ products = [], setFilteredProduct = () => {}, setCurrentPage = () => {} }) {

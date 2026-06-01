@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaCartArrowDown } from 'react-icons/fa';
-import { CartContext } from '../CartContext';
+import { CartContext } from '../context/CartContext';
 import Navbar from '../Navbar';
 import './Cart.css';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,54 +8,54 @@ import Grocery from './assets/Grocery.jpg';
 import Skincare from './assets/Skincare.jpg';
 import './HeroSection.css';
 
+const slides = [
+  {
+    image: Fashion,
+    title: 'Fashion Offers',
+    desc: 'Up to 25% off on sharp everyday looks',
+    button: 'Style Picks',
+  },
+  {
+    image: electronics,
+    title: 'Electronics Sale',
+    desc: 'Up to 50% off on smart essentials',
+    button: 'Shop Now',
+  },
+  {
+    image: Grocery,
+    title: 'Groceries Deals',
+    desc: 'Fresh picks with easy savings all week',
+    button: 'Shop Fresh',
+  },
+  {
+    image: Skincare,
+    title: 'Beauty Products',
+    desc: 'Glow-ready care with smooth daily deals',
+    button: 'Explore Beauty',
+  },
+];
+
+const settings = {
+  dots: true,
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 500,
+  autoplaySpeed: 3200,
+  cssEase: 'ease',
+  arrows: false,
+  pauseOnHover: true,
+};
+
 function HeroSection() {
-  const slides = [
-    {
-      image: Fashion,
-      title: 'Fashion Offers',
-      desc: 'Up to 25% off on sharp everyday looks',
-      button: 'Style Picks',
-    },
-    {
-      image: electronics,
-      title: 'Electronics Sale',
-      desc: 'Up to 50% off on smart essentials',
-      button: 'Shop Now',
-    },
-    {
-      image: Grocery,
-      title: 'Groceries Deals',
-      desc: 'Fresh picks with easy savings all week',
-      button: 'Shop Fresh',
-    },
-    {
-      image: Skincare,
-      title: 'Beauty Products',
-      desc: 'Glow-ready care with smooth daily deals',
-      button: 'Explore Beauty',
-    },
-  ];
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 500,
-    autoplaySpeed: 3200,
-    cssEase: 'ease',
-    arrows: false,
-    pauseOnHover: true,
-  };
-
   return (
     <section className="hero">
       <Slider {...settings}>
         {slides.map((item, index) => (
           <div key={index}>
             <div className="hero__slide">
-              <img src={item.image} alt={item.title} className="hero__image" loading="lazy" />
+              <img src={item.image} alt={item.title} className="hero__image" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
               <div className="hero__overlay" />
               <div className="hero__content">
                 <span className="hero__eyebrow">Seasonal spotlight</span>
@@ -71,4 +71,4 @@ function HeroSection() {
   );
 }
 
-export default HeroSection;
+export default memo(HeroSection);

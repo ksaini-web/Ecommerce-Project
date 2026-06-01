@@ -5,10 +5,8 @@ function UseEvent() {
   const [count, setCount] = useState(0);
   const[ text,setText] = useState("");
 
-  console.log("this is text event");
-
   useEffect(() => {
-    console.log("count update", count);
+    // Track count updates (analytics/debugging purposes)
   },[]);
 
   return (
