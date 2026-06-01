@@ -378,25 +378,23 @@ For production, replace all fallback secrets with secure environment variables.
 
 ## Screenshots
 
-![Home](screenshots/home.png)
+![Home](public/Home.png)
 
-![Products](screenshots/products.png)
+![Products](public/products.png)
 
-![Product Details](screenshots/product-details.png)
+![Product Details](public/product-details.png)
 
-![Cart](screenshots/cart.png)
+![Cart](public/Cart.png)
 
-![Checkout](screenshots/checkout.png)
+![Checkout](public/checkout.png)
 
-![Payment](screenshots/payment.png)
+![Seller Dashboard](public/seller-dashboard.png)
 
-![Seller Dashboard](screenshots/seller-dashboard.png)
+![Seller Analytics](public/SellerAnalytics.png)
 
-![Seller Analytics](screenshots/seller-analytics.png)
+![QR Code](public/QR.png)
 
-![QR Code](screenshots/qr-code.png)
-
-![File Upload](screenshots/file-upload.png)
+![File Upload](public/ProductAdd.png)
 
 ## Future Improvements
 
